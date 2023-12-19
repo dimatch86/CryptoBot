@@ -1,6 +1,6 @@
 telegram:
   bot:
-    token: 6091604064:AAHkNkfD5D1PkV2mGFBBKTB2JWxO9SfvcMA
+    token:
     username: SuperNewDDGBot
 
 binance:

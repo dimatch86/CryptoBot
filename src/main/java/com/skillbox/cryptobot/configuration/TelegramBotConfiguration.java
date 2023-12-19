@@ -33,18 +33,26 @@ public class TelegramBotConfiguration {
     @Bean
     public ReplyKeyboardMarkup replyKeyboardMarkup() {
         ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup();
+        replyKeyboardMarkup.setSelective(true);
         replyKeyboardMarkup.setResizeKeyboard(true);
         replyKeyboardMarkup.setOneTimeKeyboard(false);
-        List<KeyboardRow> keyboardRowList = new ArrayList<>();
-        KeyboardRow keyboardButtons = new KeyboardRow();
-        KeyboardRow keyboardButtons1 = new KeyboardRow();
-        keyboardRowList.add(keyboardButtons);
-        keyboardButtons.add(new KeyboardButton("Просвяти"));
-        keyboardButtons.add(new KeyboardButton("Крипта"));
-        keyboardButtons.add(new KeyboardButton("Крипта1"));
-        keyboardButtons1.add(new KeyboardButton("Кнопке \"начать\""));
-        keyboardRowList.add(keyboardButtons1);
-        replyKeyboardMarkup.setKeyboard(keyboardRowList);
+        replyKeyboardMarkup.setKeyboard(keyboardRows());
+
         return replyKeyboardMarkup;
+    }
+
+    @Bean
+    public List<KeyboardRow> keyboardRows() {
+        List<KeyboardRow> rows = new ArrayList<>();
+        rows.add(new KeyboardRow(keyboardButtons()));
+        return rows;
+    }
+
+    @Bean
+    public List<KeyboardButton> keyboardButtons() {
+        List<KeyboardButton> buttons = new ArrayList<>();
+        buttons.add(new KeyboardButton("Команда"));
+        buttons.add(new KeyboardButton("Команда2"));
+        return buttons;
     }
 }
