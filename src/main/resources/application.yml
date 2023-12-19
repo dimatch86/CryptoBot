@@ -1,0 +1,8 @@
+telegram:
+  bot:
+    token: 6091604064:AAHkNkfD5D1PkV2mGFBBKTB2JWxO9SfvcMA
+    username: SuperNewDDGBot
+
+binance:
+  api:
+    getPrice: https://api.binance.com/api/v3/avgPrice?symbol=BTCUSDT
