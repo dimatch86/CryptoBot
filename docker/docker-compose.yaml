@@ -1,0 +1,25 @@
+version: '3.8'
+services:
+  db:
+    container_name: pg_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: db
+    ports:
+      - "5433:5432"
+  backend:
+    container_name: backend
+    image: eclipse-temurin:19-jdk-jammy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg_container:5432/db
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    volumes:
+      - ./jars:/app
+    working_dir: /app
+    command: java -jar bot.jar
+    depends_on:
+      - db

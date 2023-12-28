@@ -2,13 +2,13 @@ package com.skillbox.cryptobot.configuration;
 
 
 import com.skillbox.cryptobot.bot.CryptoBot;
+import com.skillbox.cryptobot.bot.command.Commands;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardButton;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.*;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
@@ -51,8 +51,10 @@ public class TelegramBotConfiguration {
     @Bean
     public List<KeyboardButton> keyboardButtons() {
         List<KeyboardButton> buttons = new ArrayList<>();
-        buttons.add(new KeyboardButton("Команда"));
-        buttons.add(new KeyboardButton("Команда2"));
+        buttons.add(new KeyboardButton(Commands.START.getCommandType()));
+        buttons.add(new KeyboardButton(Commands.GET_PRICE.getCommandType()));
+        buttons.add(new KeyboardButton(Commands.GET_SUBSCRIPTION.getCommandType()));
+        buttons.add(new KeyboardButton(Commands.UNSUBSCRIBE.getCommandType()));
         return buttons;
     }
 }

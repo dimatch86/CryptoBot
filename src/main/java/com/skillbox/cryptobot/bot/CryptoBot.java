@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.extensions.bots.commandbot.TelegramLongPollingCommandBot;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.util.List;
@@ -19,9 +20,7 @@ public class CryptoBot extends TelegramLongPollingCommandBot {
 
     public CryptoBot(
             @Value("${telegram.bot.token}") String botToken,
-            @Value("${telegram.bot.username}") String botUsername,
-            List<IBotCommand> commandList
-    ) {
+            @Value("${telegram.bot.username}") String botUsername, List<IBotCommand> commandList) {
         super(botToken);
         this.botUsername = botUsername;
 
@@ -35,5 +34,16 @@ public class CryptoBot extends TelegramLongPollingCommandBot {
 
     @Override
     public void processNonCommandUpdate(Update update) {
+    }
+
+    public void sendMessageToSubscriber(Long chatId, String messageText) {
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId);
+        message.setText(messageText);
+        try {
+            execute(message);
+        } catch (Exception e) {
+            log.error("Ошибка возникла при отправке уведомления", e);
+        }
     }
 }
